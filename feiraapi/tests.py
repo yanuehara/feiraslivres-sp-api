@@ -2,6 +2,8 @@ import unittest
 from django.test import TestCase, TransactionTestCase
 from rest_framework.test import APIClient
 from .views import Feira
+import os
+import feiraslivres_sp_api.settings
 
 # Create your tests here.
 
@@ -130,3 +132,6 @@ class APITest(TestCase):
         response = self.client.delete('/feira/1/')
 
         self.assertEqual(response.status_code, 204)
+    
+    def test_log_exists(self):
+        assert os.path.exists(f"{feiraslivres_sp_api.settings.BASE_DIR}/feiraapi-requests.log") == 1
